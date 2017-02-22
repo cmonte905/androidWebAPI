@@ -19,7 +19,7 @@
         android:id="@+id/queryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="right"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="Search"/>
     <RelativeLayout
@@ -37,9 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/responseView"
+                android:id="@+id/leftResponseView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
         </ScrollView>
+        
     </RelativeLayout>
 </LinearLayout>
