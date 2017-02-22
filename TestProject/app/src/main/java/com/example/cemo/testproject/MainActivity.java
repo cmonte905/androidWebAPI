@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        responseView = (TextView) findViewById(R.id.responseView);
+        responseView = (TextView) findViewById(R.id.leftResponseView);
         itemSearch = (EditText) findViewById(R.id.itemSearch);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 searchString = itemSearch.getText().toString();
-                System.out.println(searchString);
+                System.out.println("Search string by user: " + searchString);
                 new RetrieveFeedTask().execute();
             }
         });
@@ -99,21 +99,30 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
             responseView.setText(response);
-            // TODO: check this.exception
-            // TODO: do something with the feed
+//             TODO: check this.exception
+//             TODO: do something with the feed
 
-//            try {
-//                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-//                String requestID = object.getString("requestId");
-//                int likelihood = object.getInt("likelihood");
-//                JSONArray photos = object.getJSONArray("photos");
-//                .
-//                .
-//                .
-//                .
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
+                String requestID = object.getString("query");
+                System.out.println(requestID + "\n\n\n\n");
+                int likelihood = object.getInt("totalResults");
+                System.out.println(likelihood + "\n\n\n\n");
+
+                JSONArray items = object.getJSONArray("items");
+
+                //Going through the items in the json array
+                for (int i = 0; i < items.length(); i++) {
+                    String itemName = items.getJSONObject(i).getString("name").toString();
+                    String itemPrice = items.getJSONObject(i).getString("salePrice").toString();
+                    System.out.println(itemName);
+                    System.out.println(itemPrice);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
