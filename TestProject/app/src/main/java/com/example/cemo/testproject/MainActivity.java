@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(walmartURL);
             try {
                 URL url = new URL(walmartURL);
-                //URL url = new URL("http://api.macys.com/v4/catalog/search?searchphrase=red%20dress&sortorderby=PRICE_ASCENDING&perpage=10&page=2&imagewidth=100&upcimagewidth=100&swatchimagewidth=100");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
-            responseView.setText(response);
+//            responseView.setText(response);
 //             TODO: check this.exception
 //             TODO: do something with the feed
 
@@ -113,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
                 //Going through the items in the json array
                 for (int i = 0; i < items.length(); i++) {
-                    String itemName = items.getJSONObject(i).getString("name").toString();
-                    String itemPrice = items.getJSONObject(i).getString("salePrice").toString();
-                    System.out.println(itemName);
-                    System.out.println(itemPrice);
+                    String itemName = items.getJSONObject(i).getString("name").toString() + "\n";
+                    String itemPrice = items.getJSONObject(i).getString("salePrice").toString() + "\n";
+                    System.out.println(itemName); responseView.append(itemName);
+                    System.out.println(itemPrice); responseView.append(itemPrice);
                 }
 
             } catch (JSONException e) {
