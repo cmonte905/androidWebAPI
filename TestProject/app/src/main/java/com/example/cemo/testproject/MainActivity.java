@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText itemSearch;
     TextView responseView;
     ProgressBar progressBar;
+    ListView itemList;
 
     //Search items
     String searchString;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         Button queryButton = (Button) findViewById(R.id.queryButton);
+
+
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
-
-        private Exception exception;
 
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
@@ -122,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+        }
+
+        public void onListItemClick(ListView l, View v, int position, long id) {
+            // Do something when a list item is clicked
         }
     }
 }
