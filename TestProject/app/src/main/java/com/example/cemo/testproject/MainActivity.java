@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(Void... urls) {
             // Do some validation here
             String walmartURL = WALMART_API_URL + searchString + WALMART_API_REPSONSE;
-            System.out.println(walmartURL);
             try {
                 URL url = new URL(walmartURL);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -99,9 +98,6 @@ public class MainActivity extends AppCompatActivity {
             }
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
-//            responseView.setText(response);
-//             TODO: check this.exception
-//             TODO: do something with the feed
 
             try {
                 JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
@@ -110,14 +106,17 @@ public class MainActivity extends AppCompatActivity {
                 int likelihood = object.getInt("totalResults");
                 System.out.println(likelihood + "\n\n\n\n");
 
+
                 JSONArray items = object.getJSONArray("items");
 
                 //Going through the items in the json array
                 for (int i = 0; i < items.length(); i++) {
                     String itemName = items.getJSONObject(i).getString("name").toString() + "\n";
                     String itemPrice = items.getJSONObject(i).getString("salePrice").toString() + "\n";
+                    String productUrl = items.getJSONObject(i).getString("productUrl").toString() + "\n\n";
                     System.out.println(itemName); responseView.append(itemName);
                     System.out.println(itemPrice); responseView.append(itemPrice);
+                    System.out.println(productUrl); responseView.append(productUrl);
                 }
 
             } catch (JSONException e) {
